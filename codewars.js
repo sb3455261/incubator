@@ -1,5 +1,28 @@
 
-
+//https://www.codewars.com/kata/56b0f5f84de0afafce00004e
+function relativelyPrime(n, arr) {
+    if(n === 1) {
+      return arr
+    }
+    let factors = [n]
+    for(let i = 2; i * i <= n; i += 1) {
+      if(!(n % i)) {
+        if(i * i === n) {
+          factors.push(i)
+          continue
+        }
+        factors.push(i, n / i)
+      }
+    }
+    const results = []
+    for(let i = 0; i < arr.length; i += 1) {
+        if(factors.every((factor) => !!(arr[i] % factor))) {
+           results.push(arr[i])
+         }
+    }
+    
+    return results
+}
 
 //https://www.codewars.com/kata/665bf5790be3c249ffb9422b
 function EvenOdd(num) {
