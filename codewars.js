@@ -1,4 +1,7 @@
-//Even or Odd Accessor 2 : Electric Boogaloo
+
+
+
+//https://www.codewars.com/kata/665bf5790be3c249ffb9422b
 function EvenOdd(num) {
     if (!(this instanceof EvenOdd)) {
         return Math.abs(num % 2) === 0 ? "Even" : "Odd"
@@ -50,7 +53,7 @@ function high(x){
 }
 
 
-//Create Phone Number
+//https://www.codewars.com/kata/525f50e3b73515a6db000b83
 function createPhoneNumber(numbers){
     const _1 = numbers.slice(0, 3)
     const _2 = numbers.slice(3, 6)
