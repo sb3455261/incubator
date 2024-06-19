@@ -1,5 +1,12 @@
+//https://www.codewars.com/kata/578553c3a1b8d5c40300037c
+const binaryArrayToNumber = arr => {
+    return parseInt(arr.join(''), 2)
+}
+
+
 //https://www.codewars.com/kata/61c49a1045dba2004e7acd1f
 function quine() { return(String(quine)) }
+
 
 //https://www.codewars.com/kata/56b0f5f84de0afafce00004e
 function relativelyPrime(n, arr) {
