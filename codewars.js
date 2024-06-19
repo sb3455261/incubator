@@ -1,3 +1,11 @@
+//https://www.codewars.com/kata/5a4ff3c5fd56cbaf9800003e
+function withoutLast(arr) {
+    const arrr = [...arr]
+    arrr.pop()
+    return [...arrr]
+}
+
+
 //https://www.codewars.com/kata/5865918c6b569962950002a1
 function strCount(str, letter){
     return str.length - str.replaceAll(letter, '').length
