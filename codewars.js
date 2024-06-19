@@ -1,3 +1,9 @@
+//https://www.codewars.com/kata/5865918c6b569962950002a1
+function strCount(str, letter){
+    return str.length - str.replaceAll(letter, '').length
+}
+
+
 //https://www.codewars.com/kata/578553c3a1b8d5c40300037c
 const binaryArrayToNumber = arr => {
     return parseInt(arr.join(''), 2)
