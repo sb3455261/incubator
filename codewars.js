@@ -1,3 +1,5 @@
+//https://www.codewars.com/kata/61c49a1045dba2004e7acd1f
+function quine() { return(String(quine)) }
 
 //https://www.codewars.com/kata/56b0f5f84de0afafce00004e
 function relativelyPrime(n, arr) {
@@ -23,6 +25,7 @@ function relativelyPrime(n, arr) {
     
     return results
 }
+
 
 //https://www.codewars.com/kata/665bf5790be3c249ffb9422b
 function EvenOdd(num) {
