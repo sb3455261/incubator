@@ -1,3 +1,68 @@
+//https://www.codewars.com/kata/54ce9497975ca65e1a0008c6
+function convertTemp(temp, from_scale, to_scale) {
+    let convertedTemp;
+    switch (from_scale) {
+      case 'C':
+        convertedTemp = temp
+        break
+      case 'F':
+        convertedTemp = (temp - 32) * 5 / 9
+        break
+      case 'K':
+        convertedTemp = temp - 273.15
+        break
+      case 'R':
+        convertedTemp = (temp - 491.67) * 5 / 9
+        break
+      case 'De':
+        convertedTemp = 100 - temp * 2 / 3
+        break
+      case 'N':
+        convertedTemp = temp * 100 / 33
+        break
+      case 'Re':
+        convertedTemp = temp * 5 / 4
+        break
+      case 'Ro':
+        convertedTemp = (temp - 7.5) * 40 / 21
+        break
+      default:
+        throw new Error('Invalid from_scale')
+    }
+  
+    switch (to_scale) {
+      case 'C':
+        convertedTemp = convertedTemp
+        break
+      case 'F':
+        convertedTemp = convertedTemp * 9 / 5 + 32
+        break
+      case 'K':
+        convertedTemp = convertedTemp + 273.15
+        break
+      case 'R':
+        convertedTemp = (convertedTemp + 273.15) * 9 / 5
+        break
+      case 'De':
+        convertedTemp = (100 - convertedTemp) * 3 / 2
+        break
+      case 'N':
+        convertedTemp = convertedTemp * 33 / 100
+        break
+      case 'Re':
+        convertedTemp = convertedTemp * 4 / 5
+        break
+      case 'Ro':
+        convertedTemp = convertedTemp * 21 / 40 + 7.5
+        break
+      default:
+        throw new Error('Invalid to_scale')
+    }
+  
+    return Math.round(convertedTemp)
+}
+
+
 //https://www.codewars.com/kata/5a4ff3c5fd56cbaf9800003e
 function withoutLast(arr) {
     const arrr = [...arr]
