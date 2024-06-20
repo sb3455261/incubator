@@ -1,3 +1,21 @@
+//https://www.codewars.com/kata/52f677797c461daaf7000740
+function gcd(a, b) {
+    while (b !== 0) {
+      [a, b] = [b, a % b]
+    }
+    return a
+}
+function solution(arr) {
+    if (arr.length === 0) return 0
+    let currentGCD = arr[0]
+    for (let i = 1; i < arr.length; i++) {
+      currentGCD = gcd(currentGCD, arr[i])
+    }
+  
+    return currentGCD * arr.length;
+}
+
+
 //https://www.codewars.com/kata/5a1fe6b1ffe75f9f5a00009f
 function operate(set, operation) {
     const isInversion = operation.includes('I')
