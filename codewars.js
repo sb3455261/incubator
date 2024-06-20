@@ -1,3 +1,24 @@
+//https://www.codewars.com/kata/5503013e34137eeeaa001648
+function diamond(size) {
+    if (size <= 0 || size % 2 === 0) {
+      return null
+    }
+    let diamondStr = ''
+    for (let i = 1; i <= size; i += 2) {
+      const spaces = ' '.repeat((size - i) / 2)
+      const stars = '*'.repeat(i)
+      diamondStr += spaces + stars + '\n'
+    }
+    for (let i = size - 2; i >= 1; i -= 2) {
+      const spaces = ' '.repeat((size - i) / 2)
+      const stars = '*'.repeat(i)
+      diamondStr += spaces + stars + '\n'
+    }
+  
+    return diamondStr
+}
+
+
 //https://www.codewars.com/kata/54ce9497975ca65e1a0008c6
 function convertTemp(temp, from_scale, to_scale) {
     let convertedTemp;
