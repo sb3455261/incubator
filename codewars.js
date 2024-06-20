@@ -1,3 +1,48 @@
+//https://www.codewars.com/kata/5270d0d18625160ada0000e4
+function score(dice) {
+    const counts = [0, 0, 0, 0, 0, 0]
+    
+    dice.forEach(die => {
+      counts[die - 1]++
+    })
+  
+    let totalScore = 0
+  
+    for (let i = 0; i < 6; i++) {
+      if (counts[i] >= 3) {
+        switch (i) {
+          case 0:
+            totalScore += 1000
+            break
+          case 1:
+            totalScore += 200
+            break
+          case 2:
+            totalScore += 300
+            break
+          case 3:
+            totalScore += 400
+            break
+          case 4:
+            totalScore += 500
+            break
+          case 5:
+            totalScore += 600
+            break
+          default:
+            break
+        }
+        counts[i] -= 3
+      }
+    }
+  
+    totalScore += counts[0] * 100
+    totalScore += counts[4] * 50
+  
+    return totalScore
+}
+
+
 //https://www.codewars.com/kata/5659c6d896bc135c4c00021e
 function nextSmaller(n) {
     const digits = n.toString().split('').map(Number)
