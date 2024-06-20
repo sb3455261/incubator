@@ -1,3 +1,21 @@
+//https://www.codewars.com/kata/5a1fe6b1ffe75f9f5a00009f
+function operate(set, operation) {
+    const isInversion = operation.includes('I')
+    const n = parseInt(operation.match(/\d+/)[0], 10)
+  
+    const transform = (note) => {
+      if (isInversion) {
+        return (12 - note + n) % 12
+      } else {
+        return (note + n) % 12
+      }
+    }
+    const transformedSet = set.map(transform)
+  
+    return transformedSet.sort((a, b) => a - b)
+}
+
+
 //https://www.codewars.com/kata/5503013e34137eeeaa001648
 function diamond(size) {
     if (size <= 0 || size % 2 === 0) {
