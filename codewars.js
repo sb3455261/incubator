@@ -1,3 +1,32 @@
+//https://www.codewars.com/kata/5659c6d896bc135c4c00021e
+function nextSmaller(n) {
+    const digits = n.toString().split('').map(Number)
+    let i = digits.length - 2
+    while (i >= 0 && digits[i] <= digits[i + 1]) {
+      i--
+    }
+  
+    if (i === -1) return -1
+  
+    let j = digits.length - 1
+    while (digits[j] >= digits[i]) {
+      j--
+    }
+  
+    [digits[i], digits[j]] = [digits[j], digits[i]]
+  
+    const left = digits.slice(0, i + 1)
+    const right = digits.slice(i + 1).sort((a, b) => b - a)
+    const result = parseInt(left.concat(right).join(''), 10)
+  
+    if (result.toString().length !== digits.length) {
+      return -1
+    }
+  
+    return result
+}
+
+
 //https://www.codewars.com/kata/52f677797c461daaf7000740
 function gcd(a, b) {
     while (b !== 0) {
