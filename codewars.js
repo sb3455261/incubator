@@ -1,5 +1,24 @@
-//
-
+//https://www.codewars.com/kata/52f7892a747862fc9a0009a6
+function countSubsequences(needle, haystack) {
+    const n = needle.length
+    const m = haystack.length
+    const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0))
+    
+    for (let i = 0; i <= m; i++) {
+        dp[i][0] = 1
+    }
+    
+    for (let i = 1; i <= m; i++) {
+        for (let j = 1; j <= n; j++) {
+            dp[i][j] = dp[i-1][j]
+            if (haystack[i-1] === needle[j-1]) {
+                dp[i][j] += dp[i-1][j-1]
+            }
+            dp[i][j] %= 100000000
+        }
+    }
+    return dp[m][n]
+}
 
 
 //https://www.codewars.com/kata/52a382ee44408cea2500074c
