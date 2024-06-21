@@ -1,3 +1,27 @@
+//
+
+
+
+//https://www.codewars.com/kata/52a382ee44408cea2500074c
+function determinant(matrix) {
+    const n = matrix.length
+
+    if (n === 1) return matrix[0][0]
+
+    let det = 0
+    for (let j = 0; j < n; j++) {
+        const minorMatrix = getMinorMatrix(matrix, 0, j)
+        const minorDeterminant = determinant(minorMatrix)
+        det += matrix[0][j] * minorDeterminant * Math.pow(-1, j)
+    }
+
+    return det
+}
+function getMinorMatrix(matrix, rowToRemove, colToRemove) {
+    return matrix.filter((row, i) => i !== rowToRemove).map(row => row.filter((_, j) => j !== colToRemove))
+}
+
+
 //https://www.codewars.com/kata/6627c36bbd7b811078d09184
 function isPrime(n, k = 5) {
     if (n <= 1n) return false
