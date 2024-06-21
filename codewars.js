@@ -1,3 +1,66 @@
+//https://www.codewars.com/kata/6627c36bbd7b811078d09184
+function isPrime(n, k = 5) {
+    if (n <= 1n) return false
+    if (n <= 3n) return true
+    if (n % 2n === 0n) return false
+  
+    let d = n - 1n;
+    let r = 0n
+    while (d % 2n === 0n) {
+      d /= 2n
+      r++
+    }
+  
+    const witnesses = [2n, 3n, 5n, 7n, 11n, 13n, 17n, 19n, 23n, 29n, 31n, 37n]
+  
+    for (let i = 0; i < k; i++) {
+      const a = witnesses[i] % n
+      if (a === 0n) continue
+  
+      let x = modExp(a, d, n)
+      if (x === 1n || x === n - 1n) continue;
+  
+      let continueLoop = false
+      for (let j = 0; j < r - 1n; j++) {
+        x = (x * x) % n
+        if (x === 1n) return false
+        if (x === n - 1n) {
+          continueLoop = true
+          break
+        }
+      }
+      if (continueLoop) continue
+      return false
+    }
+    return true
+}
+function modExp(base, exp, mod) {
+    let result = 1n
+    base = base % mod
+    while (exp > 0n) {
+      if (exp % 2n === 1n) {
+        result = (result * base) % mod
+      }
+      exp = exp >> 1n
+      base = (base * base) % mod
+    }
+    return result
+}
+function findGenerator(p) {
+    if (!isPrime(p)) return -1n
+    const q = (p - 1n) / 2n
+    if (!isPrime(q)) return -1n
+  
+    for (let g = 2n; g < p; g++) {
+      if (modExp(g, q, p) !== 1n && modExp(g, 2n, p) !== 1n) {
+        return g
+      }
+    }
+  
+    return -1n
+}
+
+
 //https://www.codewars.com/kata/5270d0d18625160ada0000e4
 function score(dice) {
     const counts = [0, 0, 0, 0, 0, 0]
