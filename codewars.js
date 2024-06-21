@@ -1,3 +1,33 @@
+//https://www.codewars.com/kata/52742f58faf5485cae000b9a
+function formatDuration(seconds) {
+    if (seconds === 0) {
+        return "now"
+    }
+
+    const units = {
+        year: 365 * 24 * 60 * 60,
+        day: 24 * 60 * 60,
+        hour: 60 * 60,
+        minute: 60,
+        second: 1
+    };
+
+    let result = []
+
+    for (const [unit, unitSeconds] of Object.entries(units)) {
+        if (seconds >= unitSeconds) {
+            const count = Math.floor(seconds / unitSeconds)
+            result.push(count + " " + (count === 1 ? unit : unit + "s"))
+            seconds %= unitSeconds
+        }
+    }
+
+    return result.length > 1
+        ? result.join(", ").replace(/,([^,]*)$/, " and" + "$1")
+        : result[0]
+}
+
+
 //https://www.codewars.com/kata/52f7892a747862fc9a0009a6
 function countSubsequences(needle, haystack) {
     const n = needle.length
