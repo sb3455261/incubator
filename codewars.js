@@ -1,3 +1,27 @@
+//https://www.codewars.com/kata/5340298112fa30e786000688
+function twosDifference(arr) {
+    arr.sort((a, b) => a - b)
+    
+    let left = 0
+    let right = 1
+    let results = []
+    
+    while (right < arr.length) {
+        if (arr[right] - arr[left] === 2) {
+            results.push([arr[left], arr[right]])
+            left++
+            right++
+        } else if (arr[right] - arr[left] < 2) {
+            right++
+        } else {
+            left++
+        }
+    }
+    
+    return results
+}
+
+
 //https://www.codewars.com/kata/52742f58faf5485cae000b9a
 function formatDuration(seconds) {
     if (seconds === 0) {
