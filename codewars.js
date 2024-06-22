@@ -1,4 +1,47 @@
-//https://www.codewars.com/kata/5a3af5b1ee1aaeabfe000084
+//https://www.codewars.com/kata/617ae98d26537f000e04a863
+function toMountain(matrix) {
+    const rows = matrix.length
+    const cols = matrix[0].length
+    let changes = true
+
+    while (changes) {
+        changes = false
+        for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < cols; j++) {
+                const neighbors = getNeighbors(matrix, i, j)
+                const maxNeighbor = Math.max(...neighbors)
+                if (matrix[i][j] < maxNeighbor - 1) {
+                    matrix[i][j] = maxNeighbor - 1
+                    changes = true
+                }
+            }
+        }
+    }
+
+    return matrix
+}
+
+function getNeighbors(matrix, i, j) {
+    const neighbors = []
+    const directions = [
+        [-1, -1], [-1, 0], [-1, 1],
+        [0, -1],           [0, 1],
+        [1, -1], [1, 0], [1, 1]
+    ];
+
+    for (const [di, dj] of directions) {
+        const ni = i + di
+        const nj = j + dj
+        if (ni >= 0 && ni < matrix.length && nj >= 0 && nj < matrix[0].length) {
+            neighbors.push(matrix[ni][nj])
+        }
+    }
+
+    return neighbors
+}
+
+
+/https://www.codewars.com/kata/5a3af5b1ee1aaeabfe000084
 function sumOfSquares(n) {
     if (Math.floor(Math.sqrt(n)) ** 2 === n) {
         return 1
