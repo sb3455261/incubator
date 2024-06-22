@@ -1,4 +1,21 @@
-//
+//https://www.codewars.com/kata/5a3af5b1ee1aaeabfe000084
+function sumOfSquares(n) {
+    if (Math.floor(Math.sqrt(n)) ** 2 === n) {
+        return 1
+    }
+    for (let i = 1; i <= Math.floor(Math.sqrt(n)); i++) {
+        if (Math.floor(Math.sqrt(n - i*i)) ** 2 === n - i*i) {
+            return 2
+        }
+    }
+    while (n % 4 === 0) {
+        n /= 4
+    }
+    if (n % 8 === 7) {
+        return 4
+    }
+    return 3
+}
 
 
 //https://www.codewars.com/kata/581d1d669ae06274d5000074
