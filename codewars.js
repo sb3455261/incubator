@@ -1,3 +1,57 @@
+//
+
+
+//https://www.codewars.com/kata/581d1d669ae06274d5000074
+function permutationByNumber(word, n) {
+    const chars = word.split('')
+    const len = chars.length
+    const sortedUniqueChars = [...new Set(chars)].sort()
+    const charCounts = {}
+    
+    for (let char of chars) {
+      charCounts[char] = (charCounts[char] || 0) + 1
+    }
+    
+    function factorial(n) {
+      if (n <= 1) return 1
+      return n * factorial(n - 1)
+    }
+    
+    function totalPermutations(counts) {
+      let denominator = 1
+      let sum = 0
+      for (let count of Object.values(counts)) {
+        sum += count
+        denominator *= factorial(count)
+      }
+      return factorial(sum) / denominator
+    }
+    
+    const total = totalPermutations(charCounts);
+    if (n >= total) return ''
+    
+    let result = ''
+    let remainingChars = {...charCounts}
+    
+    for (let i = 0; i < len; i++) {
+      for (let char of sortedUniqueChars) {
+        if (remainingChars[char] > 0) {
+          const subPermutations = totalPermutations({...remainingChars, [char]: remainingChars[char] - 1})
+          if (n >= subPermutations) {
+            n -= subPermutations
+          } else {
+            result += char
+            remainingChars[char]--
+            break
+          }
+        }
+      }
+    }
+    
+    return result
+}
+
+
 //https://www.codewars.com/kata/5340298112fa30e786000688
 function twosDifference(arr) {
     arr.sort((a, b) => a - b)
