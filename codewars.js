@@ -1,3 +1,38 @@
+//https://www.codewars.com/kata/5dcde0b9fcb0d100349cb5c0
+function longest_palindrome(s) {
+    if (s.length === 0) return ""
+    let t = '#' + s.split('').join('#') + '#'
+    let n = t.length
+    let p = new Array(n).fill(0)
+    let c = 0, r = 0
+    for (let i = 0; i < n; i++) {
+        let mirr = 2 * c - i
+        if (i < r) {
+            p[i] = Math.min(r - i, p[mirr])
+        }
+        while (i + 1 + p[i] < n && i - 1 - p[i] >= 0 && t[i + 1 + p[i]] === t[i - 1 - p[i]]) {
+            p[i]++
+        }
+        if (i + p[i] > r) {
+            c = i;
+            r = i + p[i]
+        }
+    }
+
+    let maxLen = 0
+    let centerIndex = 0
+    for (let i = 0; i < n; i++) {
+        if (p[i] > maxLen) {
+            maxLen = p[i]
+            centerIndex = i
+        }
+    }
+
+    let start = (centerIndex - maxLen) / 2
+    return s.substring(start, start + maxLen)
+}
+
+
 //https://www.codewars.com/kata/608cc9666513cc00192a67a9
 class SegmentTree {
     constructor(arr, op) {
