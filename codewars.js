@@ -1,3 +1,40 @@
+//https://www.codewars.com/kata/608cc9666513cc00192a67a9
+class SegmentTree {
+    constructor(arr, op) {
+        this.op = op
+        this.n = arr.length
+        this.tree = new Array(4 * this.n)
+        this.build(arr, 1, 0, this.n - 1)
+    }
+
+    build(arr, v, tl, tr) {
+        if (tl === tr) {
+            this.tree[v] = arr[tl]
+        } else {
+            let tm = Math.floor((tl + tr) / 2)
+            this.build(arr, v * 2, tl, tm)
+            this.build(arr, v * 2 + 1, tm + 1, tr)
+            this.tree[v] = this.op(this.tree[v * 2], this.tree[v * 2 + 1])
+        }
+    }
+
+    query(v, tl, tr, l, r) {
+        if (l > r) return null
+        if (l === tl && r === tr) return this.tree[v]
+        let tm = Math.floor((tl + tr) / 2)
+        let left = this.query(v * 2, tl, tm, l, Math.min(r, tm))
+        let right = this.query(v * 2 + 1, tm + 1, tr, Math.max(l, tm + 1), r)
+        if (left === null) return right
+        if (right === null) return left
+        return this.op(left, right)
+    }
+}
+function computeRanges(arr, op, ranges) {
+    let segTree = new SegmentTree(arr, op)
+    return ranges.map(([start, end]) => segTree.query(1, 0, arr.length - 1, start, end - 1))
+}
+
+
 //https://www.codewars.com/kata/617ae98d26537f000e04a863
 function toMountain(matrix) {
     const rows = matrix.length
