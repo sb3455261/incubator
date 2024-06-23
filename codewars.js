@@ -1,3 +1,27 @@
+//https://www.codewars.com/kata/55911ef14065454c75000062
+function multiply(a, b) {
+    if (a === '0' || b === '0') return '0'
+   
+    let result = Array(a.length + b.length).fill(0)
+    
+    for (let i = a.length - 1; i >= 0; i--) {
+      for (let j = b.length - 1; j >= 0; j--) {
+        let product = parseInt(a[i]) * parseInt(b[j])
+        let sum = result[i + j + 1] + product
+        
+        result[i + j + 1] = sum % 10
+        result[i + j] += Math.floor(sum / 10)
+      }
+    }
+    
+    while (result[0] === 0) {
+      result.shift()
+    }
+    
+    return result.join('')
+}
+
+
 //https://www.codewars.com/kata/55983863da40caa2c900004e
 function nextBigger(n) {
     let digits = n.toString().split('')
