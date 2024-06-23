@@ -1,3 +1,38 @@
+//https://www.codewars.com/kata/55c4eb777e07c13528000021
+function zeroes(base, number) {
+    function factorialZeroes(n, prime) {
+      let count = 0
+      while (n > 0) {
+        n = Math.floor(n / prime)
+        count += n
+      }
+      return count
+    }
+   
+    function factorize(n) {
+      let factors = {}
+      for (let i = 2; i * i <= n; i++) {
+        while (n % i === 0) {
+          factors[i] = (factors[i] || 0) + 1
+          n /= i
+        }
+      }
+      if (n > 1) factors[n] = 1
+      return factors
+    }
+   
+    let baseFactors = factorize(base)
+    let minZeroes = Infinity
+   
+    for (let prime in baseFactors) {
+      let primeZeroes = Math.floor(factorialZeroes(number, parseInt(prime)) / baseFactors[prime])
+      minZeroes = Math.min(minZeroes, primeZeroes)
+    }
+   
+    return minZeroes
+}
+
+
 //https://www.codewars.com/kata/6638277786032a014d3e0072
 function allocateRooms(customers) {
     const events = []
