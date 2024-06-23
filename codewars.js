@@ -1,3 +1,132 @@
+//https://www.codewars.com/kata/55aa170b54c32468c30000a9
+function parse(str) {
+    let index = 0
+   
+    function parseValue() {
+      skipWhitespace()
+      const char = str[index]
+      if (char === '{') return parseObject()
+      if (char === '[') return parseArray()
+      if (char === '"') return parseString()
+      if (char === 't') return parseTrue()
+      if (char === 'f') return parseFalse()
+      if (char === 'n') return parseNull()
+      return parseNumber()
+    }
+   
+    function parseObject() {
+      index++
+      const obj = {}
+      skipWhitespace()
+      if (str[index] === '}') {
+        index++
+        return obj
+      }
+      while (true) {
+        const key = parseString()
+        skipWhitespace()
+        if (str[index] !== ':') throw new Error('Expected :')
+        index++
+        const value = parseValue()
+        obj[key] = value
+        skipWhitespace()
+        if (str[index] === '}') {
+          index++
+          return obj
+        }
+        if (str[index] !== ',') throw new Error('Expected , or }')
+        index++
+      }
+    }
+   
+    function parseArray() {
+      index++
+      const arr = []
+      skipWhitespace()
+      if (str[index] === ']') {
+        index++
+        return arr
+      }
+      while (true) {
+        arr.push(parseValue())
+        skipWhitespace()
+        if (str[index] === ']') {
+          index++
+          return arr
+        }
+        if (str[index] !== ',') throw new Error('Expected , or ]')
+        index++
+      }
+    }
+   
+    function parseString() {
+      index++
+      let result = ''
+      while (str[index] !== '"') {
+        if (index >= str.length) throw new Error('Unterminated string')
+        result += str[index++]
+      }
+      index++
+      return result
+    }
+   
+    function parseNumber() {
+      const start = index
+      if (str[index] === '-') index++
+      if (str[index] === '0') {
+        index++
+        if (isDigit(str[index])) throw new Error('Invalid number')
+      } else if (isDigit(str[index])) {
+        index++
+        while (isDigit(str[index])) index++
+      } else {
+        throw new Error('Invalid number')
+      }
+      if (str[index] === '.') {
+        index++
+        if (!isDigit(str[index])) throw new Error('Invalid number')
+        while (isDigit(str[index])) index++
+      }
+      return Number(str.slice(start, index))
+    }
+   
+    function parseTrue() {
+      if (str.slice(index, index + 4) !== 'true') throw new Error('Expected true')
+      index += 4
+      return true
+    }
+   
+    function parseFalse() {
+      if (str.slice(index, index + 5) !== 'false') throw new Error('Expected false')
+      index += 5
+      return false
+    }
+   
+    function parseNull() {
+      if (str.slice(index, index + 4) !== 'null') throw new Error('Expected null')
+      index += 4
+      return null
+    }
+   
+    function skipWhitespace() {
+      while (str[index] === ' ' || str[index] === '\n' || str[index] === '\r' || str[index] === '\t') {
+        index++
+      }
+    }
+   
+    function isDigit(char) {
+      return char >= '0' && char <= '9'
+    }
+   
+    if (str.length === 0) throw new Error('Empty input')
+    
+    const result = parseValue()
+    skipWhitespace()
+    if (index !== str.length) throw new Error('Unexpected characters at end')
+    return result
+}
+
+
 //https://www.codewars.com/kata/55c4eb777e07c13528000021
 function zeroes(base, number) {
     function factorialZeroes(n, prime) {
