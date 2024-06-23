@@ -1,3 +1,33 @@
+//https://www.codewars.com/kata/6638277786032a014d3e0072
+function allocateRooms(customers) {
+    const events = []
+    for (let i = 0; i < customers.length; i++) {
+      events.push([customers[i][0], 1, i])
+      events.push([customers[i][1], -1, i])
+    }
+    events.sort((a, b) => a[0] - b[0] || b[1] - a[1])
+   
+    const rooms = []
+    const allocation = new Array(customers.length)
+    const availableRooms = []
+   
+    for (const [, type, index] of events) {
+      if (type === 1) {
+        if (availableRooms.length > 0) {
+          allocation[index] = availableRooms.pop()
+        } else {
+          allocation[index] = rooms.length + 1
+          rooms.push(true)
+        }
+      } else {
+        availableRooms.push(allocation[index])
+      }
+    }
+   
+    return allocation
+}
+
+
 //https://www.codewars.com/kata/5dcde0b9fcb0d100349cb5c0
 function longest_palindrome(s) {
     if (s.length === 0) return ""
@@ -92,7 +122,6 @@ function toMountain(matrix) {
 
     return matrix
 }
-
 function getNeighbors(matrix, i, j) {
     const neighbors = []
     const directions = [
