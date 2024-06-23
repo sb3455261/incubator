@@ -1,3 +1,27 @@
+//https://www.codewars.com/kata/55983863da40caa2c900004e
+function nextBigger(n) {
+    let digits = n.toString().split('')
+    let i = digits.length - 1
+    
+    while (i > 0 && digits[i - 1] >= digits[i]) {
+      i--
+    }
+    
+    if (i <= 0) return -1
+    
+    let j = digits.length - 1
+    while (digits[j] <= digits[i - 1]) {
+      j--
+    }
+    
+    [digits[i - 1], digits[j]] = [digits[j], digits[i - 1]]
+    
+    let right = digits.splice(i).reverse()
+    
+    return parseInt(digits.concat(right).join(''))
+}
+
+
 //https://www.codewars.com/kata/55aa170b54c32468c30000a9
 function parse(str) {
     let index = 0
